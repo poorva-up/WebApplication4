@@ -26,7 +26,7 @@ namespace WebApplication4.Controllers
             }
         }
 
-        public ActionResult DisplayEmployeeDetails(EmployeeDetail emp)
+        public ActionResult UpdateEmployeeDetails(EmployeeDetail emp)
         {
             return View("UpdateEmployee", emp);
         }
@@ -56,6 +56,77 @@ namespace WebApplication4.Controllers
 
             } 
         }
-               
+
+        public ActionResult AddEmployeeDetails()
+        {
+            EmployeeDetail emp = new EmployeeDetail();
+            return View("AddNewEmployee", emp);
+        }
+
+        public ActionResult AddNewEmployee(EmployeeDetail emp)
+        {
+
+            using (EmployeeEntities1 employee = new EmployeeEntities1())
+            {
+                if (ModelState.IsValid && emp != null)
+                {
+                    try
+                    {
+                        var em = employee.Entry(emp);
+                        EmployeeDetail empObj = new EmployeeDetail();
+                        var largestEmpId = Convert.ToInt32((from m in employee.EmployeeDetails
+                                                            orderby m.EmployeeID descending
+                                                            select m.EmployeeID).FirstOrDefault()) + 1;
+                        empObj.EmployeeID = largestEmpId.ToString();
+                        empObj.EmployeeName = emp.EmployeeName;
+                        empObj.EmployeeContact = emp.EmployeeContact;
+                        empObj.EmployeeCountry = emp.EmployeeCountry;
+                        employee.EmployeeDetails.Add(empObj);
+                        employee.SaveChanges();
+                        ViewBag.Message = "New Employee Added!";
+                    }
+                    catch(Exception ex)
+                    {
+                        string s= ex.StackTrace;
+                    }
+
+                }
+                else
+                {
+                    ViewBag.Message = "Employee not saved!";
+                }
+                return View();
+
+            }
+        }
+
+        public ActionResult DeleteEmployeeDetails(EmployeeDetail employee)
+        {
+            return View("DeleteEmployee",employee);
+
+        }
+        [HttpPost]
+        public ActionResult DeleteEmployee(EmployeeDetail emp)
+        {
+
+            using (EmployeeEntities1 employee = new EmployeeEntities1())
+            {
+                if (ModelState.IsValid && emp != null)
+                {
+                    EmployeeDetail empObj = new EmployeeDetail();
+                    empObj = employee.EmployeeDetails.Find(emp.EmployeeID);
+                    employee.EmployeeDetails.Remove(empObj);
+                    employee.SaveChanges();
+                    ViewBag.Message = "Employee Details Deleted";
+
+                }
+                else
+                {
+                    ViewBag.Message = "Details Cannot be deleted";
+                }
+            }
+            
+            return View();
+        }
     }
 }

@@ -15,17 +15,20 @@
             </tr>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>@Html.DisplayFor(m => item.EmployeeID)</td>
-                    <td>@Html.DisplayFor(m => item.EmployeeName)</td>
-                    <td>@Html.DisplayFor(m => item.EmployeeContact)</td>
-                    <td>@Html.DisplayFor(m => item.EmployeeCountry)</td>
-                    <td>@Ajax.ActionLink("Edit","DisplayEmployeeDetails",item ,new AjaxOptions{ HttpMethod = "Post" })</td>
+        <tr>
+            <td>@Html.DisplayFor(m => item.EmployeeID)</td>
+            <td>@Html.DisplayFor(m => item.EmployeeName)</td>
+            <td>@Html.DisplayFor(m => item.EmployeeContact)</td>
+            <td>@Html.DisplayFor(m => item.EmployeeCountry)</td>
+            <td>@Ajax.ActionLink("Edit", "UpdateEmployeeDetails", item, new AjaxOptions { HttpMethod = "Post" })</td>
+            <td>@Ajax.ActionLink("Delete", "DeleteEmployeeDetails", item, new AjaxOptions { HttpMethod = "Post" })</td>
 
-                </tr>
+        </tr>
 
             }
         </table>
+
+        @Html.ActionLink("Add New Employee","AddEmployeeDetails","EmployeeDetailsController",new AjaxOptions { HttpMethod="Get"})
 
     </div>
 

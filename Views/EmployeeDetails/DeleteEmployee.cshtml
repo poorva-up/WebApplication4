@@ -1,0 +1,31 @@
+﻿@model WebApplication4.Models.EmployeeDetail
+<h5 style="color:red">@ViewBag.Message</h5>
+<div>
+    @using (Html.BeginForm("DeleteEmployee", "EmployeeDetails", FormMethod.Post))
+    {
+        if (Model != null)
+        {
+            <table>
+                <tr>
+                    <td>Employee Name</td>
+                    <td> @Html.DisplayFor(m => m.EmployeeName)</td>
+                </tr>
+                <tr>
+                    <td>Employee Contact</td>
+                    <td> @Html.DisplayFor(m => m.EmployeeContact)</td>
+                </tr>
+                <tr>
+                    <td>Employee Country</td>
+                    <td> @Html.DisplayFor(m => m.EmployeeCountry)</td>
+                </tr>
+            </table>
+            <input type="submit" value="Delete" class="btn btn-default" />
+        }
+        @Html.ActionLink("Back to list", "Index", "EmployeeDetailsController", FormMethod.Get)
+        @Html.HiddenFor(m => m.EmployeeID)
+        @Html.HiddenFor(m => m.EmployeeName)
+        @Html.HiddenFor(m => m.EmployeeCountry)
+        @Html.HiddenFor(m => m.EmployeeContact)
+
+    }
+</div>

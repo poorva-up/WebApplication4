@@ -1,7 +1,7 @@
 ﻿@model WebApplication4.Models.EmployeeDetail
 <h5 style="color:red">@ViewBag.Message</h5>
 <div>
-    @using (Html.BeginForm("UpdateEmployee", "EmployeeDetails", FormMethod.Post))
+    @using (Html.BeginForm("AddNewEmployee", "EmployeeDetails", FormMethod.Post))
     {
 
         <table>
@@ -19,7 +19,7 @@
             </tr>
         </table>
         @Html.HiddenFor(m => m.EmployeeID)
-        <input type="submit" value="Update" class="btn btn-default" />
+        <input type="submit" value="Save" class="btn btn-default" />
     }
-    @Html.ActionLink("Back to list", "Index", "EmployeeDetailsController")
+    @Html.ActionLink("Back to list","Index","EmployeeDetailsController", FormMethod.Get)
 </div>
