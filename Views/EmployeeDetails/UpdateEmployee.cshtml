@@ -1,0 +1,24 @@
+﻿@model WebApplication4.Models.EmployeeDetail
+<h5 style="color:red">@ViewBag.Message</h5>
+<div>
+    @using (Html.BeginForm("UpdateEmployee", "EmployeeDetails", FormMethod.Post))
+    {
+
+        <table>
+            <tr>
+                <td>EmployeeName</td>
+                <td> @Html.EditorFor(m => m.EmployeeName)</td>
+            </tr>
+            <tr>
+                <td>EmployeeContact</td>
+                <td> @Html.EditorFor(m => m.EmployeeContact)</td>
+            </tr>
+            <tr>
+                <td>EmployeeCountry</td>
+                <td> @Html.EditorFor(m => m.EmployeeCountry)</td>
+            </tr>
+        </table>
+        @Html.HiddenFor(m=>m.EmployeeID)
+        <input type="submit" value="Update" class="btn btn-default" />
+    }
+</div>

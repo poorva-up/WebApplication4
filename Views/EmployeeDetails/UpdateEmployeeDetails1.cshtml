@@ -1,0 +1,37 @@
+﻿@model WebApplication4.Models.EmployeeDetail
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>UpdateEmployeeDetails</title>
+</head>
+<body>
+    <h3>@ViewBag.Message</h3>
+    <div>
+        @using (Html.BeginForm())
+        {
+
+            <table>
+                <tr>
+                    <td>EmployeeName</td>
+                    <td> @Html.EditorFor(m => m.EmployeeName)</td>
+                </tr>
+                <tr>
+                    <td>EmployeeContact</td>
+                    <td> @Html.EditorFor(m => m.EmployeeContact)</td>
+                </tr>
+                <tr>
+                    <td>EmployeeCountry</td>
+                    <td> @Html.EditorFor(m => m.EmployeeCountry)</td>
+                </tr>
+            </table>
+            <input type="submit" value="Update" class="btn btn-default" />
+        }
+    </div>
+</body>
+</html>
